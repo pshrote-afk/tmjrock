@@ -1,0 +1,89 @@
+<DOCTYPE HTML>
+<html lang='en>
+<meta charset utf='8'>
+<head>
+<title>Modal</title>
+<link href='css/styles.css' rel='stylesheet'>
+<script>
+//TMJRock part starts here
+function $$$(parameter)
+{
+}
+$$$.modal = function(parameter){
+showModal();
+var element = document.getElementById(parameter);
+element.remove();
+
+var modalTextArea = document.getElementById('modalTextArea');
+modalTextArea.innerHTML = element.outerHTML;
+
+}
+function showModal()
+{
+document.getElementById('modal').style.visibility='visible';
+}
+function hideModal()
+{
+document.getElementById('modal').style.visibility='hidden';
+var modalTextArea = document.getElementById('modalTextArea');
+while(modalTextArea.firstChild)
+{
+document.body.appendChild(modalTextArea.firstChild);	//in DOM, an element can have only one parent. So appending to document, automatically removes it from the span of the modal.
+}
+}
+//TMJRock part ends here
+//TMJRock user script starts here
+function showXYZ()
+{
+$$$.modal("xyz");
+}
+function showPQR()
+{
+$$$.modal("pqr");
+}
+
+</script>
+</head>
+
+<button type='button' onclick='showModal()'>
+Show Modal</button> 
+
+<div id='modal' class='modal'>
+<div id='panel' class='panel'>
+<span id='closeButton' class='closeButton'>
+<img class='closeButtonImg' src='images/closeButton.png' onclick='hideModal()'>
+<br>
+</span>
+<span id='modalTextArea'>
+&nbsp<br>
+[Some placeholder text for this modal]<br>
+[Some placeholder text for this modal]<br>
+[Some placeholder text for this modal]<br>
+&nbsp<br>
+<span>
+</div>
+</div>
+
+<h1>This is a modal example</h1>
+<button onclick='showXYZ()'>XYZ</button><br><br>
+<button onclick='showPQR()'>PQR</button><br><br>
+
+<div id='xyz'>
+<b>Cool</b>
+<h1>Whatever</h1>
+Great<br>
+Something something
+</div>
+
+<table id='pqr'>
+<tr><td>Whatever 1</td><td>Whatever 11</td></tr>
+<tr><td>Whatever 2</td><td>Whatever 22</td></tr>
+<tr><td>Whatever 3</td><td>Whatever 33</td></tr>
+<tr><td>Whatever 4</td><td>Whatever 44</td></tr>
+<tr><td>Whatever 5</td><td>Whatever 55</td></tr>
+<tr><td>Whatever 6</td><td>Whatever 66</td></tr>
+</table>
+
+<body>
+</body>
+</html>

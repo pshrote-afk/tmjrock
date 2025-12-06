@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>TMGrid Prototyping</title>
+<style>
+
+.someClass
+{
+height:200px;
+width:750px;
+border:1px solid red;
+overflow:auto;
+}
+
+.tmjrock_tmgrid
+{
+border:3px dashed violet;
+border-bottom-left-radius: 30px;
+border-top-right-radius: 30px;
+overflow:hidden; 		<!-- hides contents overflowing out of curved borders -->
+
+}
+
+.tmjrock_tmgrid th
+{
+border:3px dashed gray;
+border-collapse:collapse;
+border-spacing:0px;
+border-top-left-radius: 100px;
+border-bottom-left-radius: 100px;
+border-top-right-radius: 100px;
+border-bottom-right-radius: 100px;
+
+}
+
+.tmjrock_tmgrid td
+{
+border:5px dotted green;
+width:50px;
+text-align:right;
+border-top-left-radius: 100px;
+border-bottom-left-radius: 100px;
+border-top-right-radius: 100px;
+border-bottom-right-radius: 100px;
+
+}
+.tmjrock_tmgrid td+td
+{
+border:3px dotted red;
+width:150px;
+text-align:left;
+}
+.tmjrock_tmgrid td+td+td
+{
+border:3px outset blue;
+width:450px;
+text-align:center;
+}
+
+
+
+</style>
+
+<script>
+</script>
+</head>
+<body>
+
+<div class='someClass'>
+<table class='tmjrock_tmgrid'>
+<thead>
+<tr>
+<th>S.No.</th>
+<th>First Name</th>
+<th>Last Name</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>2.</td>
+<td>Saurabh</td>
+<td>Jasianwala </td>
+</tr>
+
+<tr>
+<td>1.</td>
+<td>Saurabh</td>
+<td>Jasianwala</td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Saurabh</td>
+<td>Jasianwala</td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Saurabh</td>
+<td>Jasianwala</td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Saurabh</td>
+<td>Jasianwala</td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Saurabh</td>
+<td>Jasianwala</td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Saurabh</td>
+<td>Jasianwala</td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Saurabh</td>
+<td>Jasianwala</td>
+</tr>
+<tr>
+<td>10.</td>
+<td>Saurabh</td>
+<td>Jasianwala</td>
+</tr>
+
+
+</tbody>
+
+</table>
+</div>
+
+</body>
+</html>
