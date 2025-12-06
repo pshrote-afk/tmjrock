@@ -1,5 +1,5 @@
         class Grid {
-            constructor(dataTableId, paginationTableId, dataSource, columns, pageSize) {
+            constructor(dataTableId, paginationTableId, dataSource, columns, pageSize, numberOfPaginationControls) {
                 var objectAddress = this;
                 this.dataTableId = dataTableId;
                 this.paginationTableId = paginationTableId;
@@ -7,8 +7,9 @@
 		this.columns = columns;
                 this.pageSize = pageSize;
 
-                this.pageNumber = 1;
-                this.numberOfPaginationControls = 5;
+                this.pageNumber = 1;			// the value of this is the value on which the table page is. This value changes everytime a different page is clicked
+		
+                this.numberOfPaginationControls = numberOfPaginationControls || 5;
 
                 this.update();
                 this.updatePagination();

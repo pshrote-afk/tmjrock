@@ -83,7 +83,8 @@
 	    ];
 
             let pageSize = 20;
-            $$$.model.grid = new Grid('dataTable', 'dataTablePagination', students, columns, pageSize);
+	    let numberOfPaginationControls = 5;
+            $$$.model.grid = new Grid('dataTable', 'dataTablePagination', students, columns, pageSize, numberOfPaginationControls);
 
 
         }
