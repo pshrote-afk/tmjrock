@@ -1,9 +1,10 @@
         class Grid {
-            constructor(dataTableId, paginationTableId, students, pageSize) {
+            constructor(dataTableId, paginationTableId, dataSource, columns, pageSize) {
                 var objectAddress = this;
                 this.dataTableId = dataTableId;
                 this.paginationTableId = paginationTableId;
-                this.students = students;
+                this.dataSource = dataSource;
+		this.columns = columns;
                 this.pageSize = pageSize;
 
                 this.pageNumber = 1;
@@ -22,28 +23,26 @@
                 //add new entries
                 var startFromIndex = (this.pageNumber - 1) * this.pageSize;
                 var endAtIndex = startFromIndex + this.pageSize - 1;
-                if (endAtIndex >= this.students.length) endAtIndex = this.students.length - 1;	//length is 1 based, endAtIndex is 0 based
+                if (endAtIndex >= this.dataSource.length) endAtIndex = this.dataSource.length - 1;	//length is 1 based, endAtIndex is 0 based
 
                 var tr;
                 var td;
+		var fieldName;
                 for (var i = startFromIndex; i <= endAtIndex; i++) {
                     tr = document.createElement("tr");
                     td = document.createElement("td");
+
+		    //sno
                     td.innerHTML = i + 1;
                     tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.innerHTML = this.students[i].roll;
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.innerHTML = this.students[i].name;
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.innerHTML = this.students[i].nameOfMother;
-                    tr.appendChild(td);
-                    td = document.createElement("td");
-                    td.innerHTML = this.students[i].nameOfFather;
-                    tr.appendChild(td);
 
+  		    for(var j = 0; j < this.columns.length; j++) {
+			td = document.createElement("td");
+			fieldName = this.columns[j].field;
+			td.innerHTML = this.dataSource[i][fieldName];
+			tr.appendChild(td);
+		    }
+              
                     dataTable.appendChild(tr);
                 }
 
@@ -71,8 +70,8 @@
                 let startFrom = Math.floor((this.pageNumber - 1) / this.numberOfPaginationControls) * this.numberOfPaginationControls + 1;
                 let endAt = startFrom + this.numberOfPaginationControls - 1;
 
-                var totalNumberOfPages = Math.floor(this.students.length / this.pageSize);
-                if (this.students.length % this.pageSize != 0) totalNumberOfPages++;
+                var totalNumberOfPages = Math.floor(this.dataSource.length / this.pageSize);
+                if (this.dataSource.length % this.pageSize != 0) totalNumberOfPages++;
                 if (endAt > totalNumberOfPages) endAt = totalNumberOfPages;
 
 
@@ -141,7 +140,7 @@
 			// initialize dataset
 	
         	// let pageSize = 20;
-        	// model.grid = new Grid('dataTable', 'dataTablePagination', students, pageSize);
+        	// model.grid = new Grid('dataTable', 'dataTablePagination', dataSource, pageSize);
 
 	
 		}

@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<meta charset='utf-8'>
+
+<head>
+	<title>AJAX Examples</title>
+<link rel='stylesheet' href='tmjrock.css' />
+<script src='tmjrock.js'></script>
+
+	<script>
+		//TMJRock user part starts
+
+		function createModal1() {
+			$$$.modals.show("ab");
+		}
+		function abBeforeOpening() {
+			alert('Modal w/ ab is about to be opened');
+			return true;
+		}
+		function abOpened() {
+			alert('Modal w/ ab opened');
+		}
+		function abBeforeClosing() {
+			alert('Modal w/ ab is about to be closed');
+			return true;
+		}
+		function abClosed() {
+			alert('Modal w/ ab closed');
+		}
+
+	</script>
+
+    <script>
+
+        class Student {
+            constructor(roll, name, nameOfMother, nameOfFather) {
+                this.roll = roll;
+                this.name = name;
+                this.nameOfMother = nameOfMother;
+                this.nameOfFather = nameOfFather;
+            }
+        }
+
+	function initializeUserGrid() {
+            //initialize dataset
+            var students = new Array();	//var students = [];
+
+            var student;
+            for (var i = 101; i <= 1006; i++) {
+                student = new Student();
+                student.roll = i + " Roll";
+                student.name = i + " Name";
+                student.nameOfMother = i + " Mother";
+                student.nameOfFather = i + " Father";
+                students.push(student);
+            }
+
+            let pageSize = 20;
+            $$$.model.grid = new Grid('dataTable', 'dataTablePagination', students, pageSize);
+
+
+        }
+
+	function initializeUserGrid() {
+            //initialize dataset
+            var students = new Array();	//var students = [];
+
+            
+            for (var i = 101; i <= 1006; i++) {
+            	students.push({
+			roll: i + " Roll",
+			name: i + " Name",
+			nameOfMother: i + " Mother",
+			nameOfFather: i + " Father",
+		});    
+            }
+
+	    var columns = [
+		{field: "roll"},
+		{field: "name"},
+		{field: "nameOfMother"},
+		{field: "nameOfFather"}
+	    ];
+
+            let pageSize = 20;
+            $$$.model.grid = new Grid('dataTable', 'dataTablePagination', students, columns, pageSize);
+
+
+        }
+
+	$$$.onDocumentLoaded(initializeUserGrid);
+    </script>
+
+
+    <!-- user specific styling -->
+    <style>
+        .someClass {
+            width: 900px;
+            height: 600px;
+            border: 1px solid red;
+            overflow: auto;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+	<div accordian="true">
+		<h3>Heading 1</h3>
+		<div>
+			Content 1 Content 1 Content 1 Content 1 Content 1<br>
+			Content 1 Content 1 Content 1 Content 1 Content 1<br>
+			Content 1 Content 1 Content 1 Content 1 Content 1<br>
+			Content 1 Content 1 Content 1 Content 1 Content 1<br>
+			Content 1 Content 1 Content 1 Content 1 Content 1<br>
+			Content 1 Content 1 Content 1 Content 1 Content 1<br>
+		</div>
+
+		<h3>Heading 2</h3>
+		<div>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+		</div>
+
+		<h3>Heading 3</h3>
+		<div>
+			Content 3 Content 3 Content 3 Content 3 Content 3<br>
+			Content 3 Content 3 Content 3 Content 3 Content 3<br>
+			Content 3 Content 3 Content 3 Content 3 Content 3<br>
+		</div>
+
+	</div> <!--end of 'mymy'-->
+
+	<div accordian="true">
+		<h3>Heading 4</h3>
+		<div>
+			Content 1 Content 1 Content 1 Content 1 Content 1<br>
+			Content 1 Content 1 Content 1 Content 1 Content 1<br>
+			Content 1 Content 1 Content 1 Content 1 Content 1<br>
+			Content 1 Content 1 Content 1 Content 1 Content 1<br>
+			Content 1 Content 1 Content 1 Content 1 Content 1<br>
+			Content 1 Content 1 Content 1 Content 1 Content 1<br>
+		</div>
+
+		<h3>Heading 5</h3>
+		<div>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+		</div>
+
+		<h3>Heading 6</h3>
+		<div>
+			Content 3 Content 3 Content 3 Content 3 Content 3<br>
+			Content 3 Content 3 Content 3 Content 3 Content 3<br>
+			Content 3 Content 3 Content 3 Content 3 Content 3<br>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+			Content 2 Content 2 Content 2 Content 2 Content 2<br>
+		</div>
+
+	</div> <!--end of 'gogo'-->
+
+	<br>
+	<button onclick='createModal1()'>
+		Create First Modal
+	</button>
+
+	<div id='ab' style='display:none' forModal="true" size="200x300" header="Some header" footer="Some footer"
+		maskColor="#3355ff" modalBackgroundColor="#549933" closeButton="true" beforeOpening="abBeforeOpening()"
+		afterOpening="abOpened()" beforeClosing="abBeforeClosing()" afterClosing="abClosed()">
+		God is great<br>
+	</div>
+	<div id='pq' forModal="true">
+		Ujjain is the city of Gods
+	</div>
+	<br>
+--x--x--x--
+
+    <div class='someClass'>
+        <div class='tmjrock_tmgrid_header_division' style='width:300px;overflow-x:hidden;'>
+            <!-- using inline css to override and allow header table to shrink to 300px while still having scroll. For un-trackable reason it is not responding to css class. Potential reason: 2 <style> blocks -->
+            <table class='tmjrock_tmgrid_head'>
+                <tr>
+                    <td>S.No.</td>
+                    <td>Roll</td>
+                    <td>Name</td>
+                    <td>Mother's name</td>
+                    <td>Father's name</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class='tmjrock_tmgrid_body_division'>
+            <table class='tmjrock_tmgrid_body' id='dataTable'>
+
+            </table>
+        </div>
+
+        <div class='tmjrock_tmgrid_pagination_division'>
+            <table class='tmjrock_tmgrid_pagination' id='dataTablePagination'>
+            </table>
+        </div>
+
+    </div>
+
+
+
+
+</body>
+
+</html>
