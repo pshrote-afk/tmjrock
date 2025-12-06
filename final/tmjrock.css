@@ -1,0 +1,135 @@
+.tmjrock_modalMask {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	border: 1px solid red;
+	background: gray;
+	position: fixed;
+	opacity: 70%
+}
+
+.tmjrock_modalMaskDivision {
+	width: 400px;
+	min-width: 200px;
+	height: 300px;
+	min-height: 300px;
+	background-color: blue;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	border: 2px solid white;
+}
+
+.tmjrock_closeButton {
+	float: right;
+	padding: 2px 7px;
+	cursor: pointer;
+	margin-right: 5px;
+	margin-top: 5px;
+	font-size: 14pt;
+}
+
+.tmjrock_tmgrid_header_division {
+	overflow-x: hidden;
+	overflow-y: hidden;
+	width: 300px !important;
+}
+
+.tmjrock_tmgrid_body_division {
+	overflow-x: scroll;
+	overflow-y: scroll;
+	width: 300px;
+	height: 300px;
+}
+
+.tmjrock_tmgrid_head {
+	border: 1px groove green;
+	border-bottom: 0px;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	background: lightgray;
+	width: 750px;
+}
+
+.tmjrock_tmgrid_head td {
+	border-left: 1px groove red;
+	border-right: 1px groove red;
+	border-top: 1px groove red;
+	border-bottom: 0px;
+	width: 50px;
+	text-align: right;
+}
+
+.tmjrock_tmgrid_head td+td {
+	width: 100px;
+	text-align: left;
+}
+
+.tmjrock_tmgrid_head td+td+td {
+	width: 200px;
+	text-align: left;
+}
+
+.tmjrock_tmgrid_head td+td+td+td {
+	width: 200px;
+	text-align: left;
+}
+
+.tmjrock_tmgrid_head td+td+td+td+td {
+	width: 200px;
+	text-align: left;
+}
+
+.tmjrock_tmgrid_body {
+	border: 1px groove green;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	width: 750px;
+}
+
+.tmjrock_tmgrid_body td {
+	border: 1px groove red;
+	width: 50px;
+	text-align: right;
+}
+
+.tmjrock_tmgrid_body td+td {
+	width: 100px;
+	text-align: left;
+}
+
+.tmjrock_tmgrid_body td+td+td {
+	width: 200px;
+	text-align: left;
+}
+
+.tmjrock_tmgrid_body td+td+td+td {
+	width: 200px;
+	text-align: left;
+}
+
+.tmjrock_tmgrid_body td+td+td+td+td {
+	width: 200px;
+	text-align: left;
+}
+
+.tmjrock_tmgrid_pagination_division {
+	margin-top: 20px;
+}
+
+.tmjrock_tmgrid_pagination_division a {
+	background-color: red;
+	color: white;
+	padding: 5px 10px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.tmjrock_tmgrid_pagination td {
+	width: 100px;
+	text-align: center;
+}
