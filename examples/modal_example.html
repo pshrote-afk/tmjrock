@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<meta charset='utf-8'>
+
+<head>
+    <title>AJAX Examples</title>
+    <link rel='stylesheet' href='..\tmjrock.css' />
+    <script src='..\tmjrock.js'></script>
+
+    <script>
+        function abBeforeOpening() {
+            alert('Modal w/ ab is about to be opened');
+            return true;
+        }
+        function abOpened() {
+            alert('Modal w/ ab opened');
+        }
+        function abBeforeClosing() {
+            alert('Modal w/ ab is about to be closed');
+            return true;
+        }
+        function abClosed() {
+            alert('Modal w/ ab closed');
+        }
+
+        function createModal1() {
+            $$$.modals.show("ab");
+        }
+        function createModal2() {
+            $$$.modals.show("pq");
+        }
+
+    </script>
+</head>
+
+<body>
+
+
+    <button onclick='createModal1()'>
+        Create First Modal
+    </button>
+
+    <button onclick='createModal2()'>
+        Create Second Modal
+    </button>
+
+    <div id='ab' closeButton="true" forModal="true" style='display:none' size="200x300" header="Some header 1"
+        footer="Some footer 1" maskColor="#3355ff" modalBackgroundColor="#549933" 
+        beforeOpening="abBeforeOpening()"
+        afterOpening="abOpened()" 
+        beforeClosing="abBeforeClosing()" 
+        afterClosing="abClosed()">
+        God is great
+    </div>
+    <div id='pq' closeButton="true" forModal="true" style='display:none' size="200x300" header="Some header 2"
+        footer="Some footer 2" maskColor="#CCAA00" modalBackgroundColor="#AB66CC">
+        Where there is a will, there is a way
+    </div>
+    <br>
+
+</body>
+
+</html>

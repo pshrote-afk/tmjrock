@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'>
+    <title>Grid Example</title>
+
+    <link rel='stylesheet' href='..\tmjrock.css' />
+    <script src='..\tmjrock.js'></script>
+
+    <!-- user specific styling -->
+    <style>
+        .someClass {
+            width: 700px;
+            height: 400px;
+            border: 1px solid red;
+            overflow: auto;
+        }
+    </style>
+
+    <script>
+
+
+        function initializeUserGrid() {
+            //initialize dataset
+            var students = new Array();	//var students = [];
+
+
+            for (var i = 101; i <= 1006; i++) {
+                students.push({
+                    roll: i + " Roll",
+                    name: i + " Name",
+                    nameOfMother: i + " Mother",
+                    nameOfFather: i + " Father",
+                });
+            }
+
+            var columns = [
+                { field: "roll" },
+                { field: "name" },
+                { field: "nameOfMother" },
+                { field: "nameOfFather" }
+            ];
+
+            let pageSize = 20;
+            let numberOfPaginationControls = 5;
+            $$$.model.grid = new Grid('dataTable', 'dataTablePagination', students, columns, pageSize, numberOfPaginationControls);
+
+
+        }
+
+        $$$.onDocumentLoaded(initializeUserGrid);
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class='someClass'>
+        <div class='tmjrock_tmgrid_header_division' style='width:300px;overflow-x:hidden;'>
+            <!-- using inline css to override and allow header table to shrink to 300px while still having scroll. For un-trackable reason it is not responding to css class. Potential reason: 2 <style> blocks -->
+            <table class='tmjrock_tmgrid_head'>
+                <tr>
+                    <td>S.No.</td>
+                    <td>Roll</td>
+                    <td>Name</td>
+                    <td>Mother's name</td>
+                    <td>Father's name</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class='tmjrock_tmgrid_body_division'>
+            <table class='tmjrock_tmgrid_body' id='dataTable'>
+
+            </table>
+        </div>
+
+        <div class='tmjrock_tmgrid_pagination_division'>
+            <table class='tmjrock_tmgrid_pagination' id='dataTablePagination'>
+            </table>
+        </div>
+
+    </div>
+</body>
+
+</html>
