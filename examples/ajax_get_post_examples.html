@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<meta charset='utf-8'>
+
+<head>
+    <title>AJAX Examples</title>
+    <link rel='stylesheet' href='..\tmjrock.css' />
+    <script src='..\tmjrock.js'></script>
+
+
+    <script>
+
+        function populateDesignations() {
+
+            $$$.ajax({
+                "url": "../servletOne",
+                "methodType": "GET",
+
+                "success": function (responseData) {
+                    alert("entered success function");
+                    responseData = JSON.parse(responseData);
+                    var designations = responseData.data;
+                    $$$("designationCode").fillComboBox({
+                        "dataSource": designations,
+                        "text": "title",
+                        "value": "code",
+                        "firstOption": {
+                            "text": "<Select Designation>",
+                            "value": "-1"
+                        }
+                    });
+                },
+                "failure": function () {
+                    alert("entered failure function");
+                    alert("some problem");
+                }
+            });
+        }
+        function saveEnquiry() {
+            var firstName = $$$("firstName").value();
+            var lastName = $$$("lastName").value();
+            var age = $$$("age").value();
+
+            var customer = {
+                "firstName": firstName,
+                "lastName": lastName,
+                "age": age
+            };
+            var someDiv = $$$("someDiv");
+            someDiv.html("");
+
+            $$$.ajax({
+                "methodType": "POST",
+                "url": "../servletThree",
+                "data": customer,
+                "sendJSON": false,
+                "success": function (responseData) {
+                    var customer = JSON.parse(responseData);
+                    var a = "First name: " + customer.firstName + "<br>";
+                    a = a + "Last name: " + customer.lastName + "<br>";
+                    a = a + "Age: " + customer.age + "<br>";
+                    someDiv.html(a);
+                },
+                "failure": function () {
+                    alert('Some problem 2');
+                }
+            });
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <h3> Example of Get using $$$ </h3>
+    Designations:
+    <select id='designationCode'>
+    </select>
+    <button type='button' onclick='populateDesignations()'>Send get request</button> <br><br>
+
+    <h3> Example of Post using $$$ </h3>
+    Enter first name: <input type='text' id='firstName'><br>
+    Enter last name: <input type='text' id='lastName'><br>
+    Enter age: <input type='text' id='age'><br>
+
+    <button type='button' onclick='saveEnquiry()'>Save (Send post request)</button> <br><br>
+
+    <div id='someDiv'></div>
+
+
+</body>
+
+</html>

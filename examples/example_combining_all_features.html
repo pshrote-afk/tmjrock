@@ -1,0 +1,290 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<meta charset='utf-8'>
+
+<head>
+    <title>AJAX Examples</title>
+    <link rel='stylesheet' href='..\tmjrock.css' />
+    <script src='..\tmjrock.js'></script>
+
+    <!-- user specific styling for red border around grid example -->
+    <style>
+        .someClass {
+            width: 700px;
+            height: 400px;
+            border: 1px solid red;
+            overflow: auto;
+        }
+    </style>
+
+    <!-- user specific code for ajax example -->
+    <script>
+        function populateDesignations() {
+
+            $$$.ajax({
+                "url": "../servletOne",
+                "methodType": "GET",
+
+                "success": function (responseData) {
+                    alert("entered success function");
+                    responseData = JSON.parse(responseData);
+                    var designations = responseData.data;
+                    $$$("designationCode").fillComboBox({
+                        "dataSource": designations,
+                        "text": "title",
+                        "value": "code",
+                        "firstOption": {
+                            "text": "<Select Designation>",
+                            "value": "-1"
+                        }
+                    });
+                },
+                "failure": function () {
+                    alert("entered failure function");
+                    alert("some problem");
+                }
+            });
+        }
+        function saveEnquiry() {
+            var firstName = $$$("firstName").value();
+            var lastName = $$$("lastName").value();
+            var age = $$$("age").value();
+
+            var customer = {
+                "firstName": firstName,
+                "lastName": lastName,
+                "age": age
+            };
+            var someDiv = $$$("someDiv");
+            someDiv.html("");
+
+            $$$.ajax({
+                "methodType": "POST",
+                "url": "../servletThree",
+                "data": customer,
+                "sendJSON": false,
+                "success": function (responseData) {
+                    var customer = JSON.parse(responseData);
+                    var a = "First name: " + customer.firstName + "<br>";
+                    a = a + "Last name: " + customer.lastName + "<br>";
+                    a = a + "Age: " + customer.age + "<br>";
+                    someDiv.html(a);
+                },
+                "failure": function () {
+                    alert('Some problem 2');
+                }
+            });
+        }
+
+
+    </script>
+
+    <!-- user specific code for modal example -->
+    <script>
+        function abBeforeOpening() {
+            alert('Modal w/ ab is about to be opened');
+            return true;
+        }
+        function abOpened() {
+            alert('Modal w/ ab opened');
+        }
+        function abBeforeClosing() {
+            alert('Modal w/ ab is about to be closed');
+            return true;
+        }
+        function abClosed() {
+            alert('Modal w/ ab closed');
+        }
+
+        function createModal1() {
+            $$$.modals.show("ab");
+        }
+        function createModal2() {
+            $$$.modals.show("pq");
+        }
+
+    </script>
+
+    <!-- user specific code for grid example -->
+    <script>
+        function initializeUserGrid() {
+            //initialize dataset
+            var students = new Array();	//var students = [];
+
+
+            for (var i = 101; i <= 1006; i++) {
+                students.push({
+                    roll: i + " Roll",
+                    name: i + " Name",
+                    nameOfMother: i + " Mother",
+                    nameOfFather: i + " Father",
+                });
+            }
+
+            var columns = [
+                { field: "roll" },
+                { field: "name" },
+                { field: "nameOfMother" },
+                { field: "nameOfFather" }
+            ];
+
+            let pageSize = 20;
+            let numberOfPaginationControls = 5;
+            $$$.model.grid = new Grid('dataTable', 'dataTablePagination', students, columns, pageSize, numberOfPaginationControls);
+
+
+        }
+
+        $$$.onDocumentLoaded(initializeUserGrid);
+
+    </script>
+
+
+</head>
+
+<body>
+    <h3> 1. Example of Get using $$$ </h3>
+    Designations:
+    <select id='designationCode'>
+    </select>
+    <button type='button' onclick='populateDesignations()'>Send get request</button> <br><br>
+
+    <hr>
+
+    <h3> 2. Example of Post using $$$ </h3>
+    Enter first name: <input type='text' id='firstName'><br>
+    Enter last name: <input type='text' id='lastName'><br>
+    Enter age: <input type='text' id='age'><br>
+
+    <button type='button' onclick='saveEnquiry()'>Save (Send post request)</button> <br><br>
+
+    <div id='someDiv'></div>
+
+    <hr>
+    <h3> 3. Example of Modal </h3>
+    
+    <button onclick='createModal1()'>
+        Create First Modal
+    </button>
+
+    <button onclick='createModal2()'>
+        Create Second Modal
+    </button>
+
+    <div id='ab' closeButton="true" forModal="true" style='display:none' size="200x300" header="Some header 1"
+        footer="Some footer 1" maskColor="#3355ff" modalBackgroundColor="#549933" beforeOpening="abBeforeOpening()"
+        afterOpening="abOpened()" beforeClosing="abBeforeClosing()" afterClosing="abClosed()">
+        God is great
+    </div>
+    <div id='pq' closeButton="true" forModal="true" style='display:none' size="200x300" header="Some header 2"
+        footer="Some footer 2" maskColor="#3355ff" modalBackgroundColor="#2A7B9B">
+        Where there is a will, there is a way
+    </div>
+    <br><br>
+
+
+    <hr>
+
+    <h3> 4. Example of Grid</h3>
+    <div class='someClass'>
+        <div class='tmjrock_tmgrid_header_division' style='width:300px;overflow-x:hidden;'>
+            <!-- using inline css to override and allow header table to shrink to 300px while still having scroll. For un-trackable reason it is not responding to css class. Potential reason: 2 <style> blocks -->
+            <table class='tmjrock_tmgrid_head'>
+                <tr>
+                    <td>S.No.</td>
+                    <td>Roll</td>
+                    <td>Name</td>
+                    <td>Mother's name</td>
+                    <td>Father's name</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class='tmjrock_tmgrid_body_division'>
+            <table class='tmjrock_tmgrid_body' id='dataTable'>
+
+            </table>
+        </div>
+
+        <div class='tmjrock_tmgrid_pagination_division'>
+            <table class='tmjrock_tmgrid_pagination' id='dataTablePagination'>
+            </table>
+        </div>
+
+    </div>
+    <br>
+
+    <hr>
+
+    <h3> 5. Example of Accordian</h3>
+    <em>Click on any heading</em>
+    <div accordian="true">
+        <h3>Heading 1</h3>
+        <div>
+            Content 1 Content 1 Content 1 Content 1 Content 1<br>
+            Content 1 Content 1 Content 1 Content 1 Content 1<br>
+            Content 1 Content 1 Content 1 Content 1 Content 1<br>
+            Content 1 Content 1 Content 1 Content 1 Content 1<br>
+            Content 1 Content 1 Content 1 Content 1 Content 1<br>
+            Content 1 Content 1 Content 1 Content 1 Content 1<br>
+        </div>
+
+        <h3>Heading 2</h3>
+        <div>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+        </div>
+
+        <h3>Heading 3</h3>
+        <div>
+            Content 3 Content 3 Content 3 Content 3 Content 3<br>
+            Content 3 Content 3 Content 3 Content 3 Content 3<br>
+            Content 3 Content 3 Content 3 Content 3 Content 3<br>
+        </div>
+
+    </div> <!--end of 'mymy'-->
+
+    <div accordian="true">
+        <h3>Heading 4</h3>
+        <div>
+            Content 1 Content 1 Content 1 Content 1 Content 1<br>
+            Content 1 Content 1 Content 1 Content 1 Content 1<br>
+            Content 1 Content 1 Content 1 Content 1 Content 1<br>
+            Content 1 Content 1 Content 1 Content 1 Content 1<br>
+            Content 1 Content 1 Content 1 Content 1 Content 1<br>
+            Content 1 Content 1 Content 1 Content 1 Content 1<br>
+        </div>
+
+        <h3>Heading 5</h3>
+        <div>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+        </div>
+
+        <h3>Heading 6</h3>
+        <div>
+            Content 3 Content 3 Content 3 Content 3 Content 3<br>
+            Content 3 Content 3 Content 3 Content 3 Content 3<br>
+            Content 3 Content 3 Content 3 Content 3 Content 3<br>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+            Content 2 Content 2 Content 2 Content 2 Content 2<br>
+        </div>
+
+    </div> <!--end of 'gogo'-->
+
+
+    <hr>
+
+
+
+</body>
+
+</html>
